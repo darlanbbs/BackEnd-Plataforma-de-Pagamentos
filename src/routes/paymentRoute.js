@@ -1,7 +1,7 @@
 const express = require("express");
-const route = express();
+const PaymentRoute = express();
 
 
 
 
-module.exports = route;
+module.exports = PaymentRoute;
