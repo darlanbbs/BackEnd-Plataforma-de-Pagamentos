@@ -1,7 +1,7 @@
 const { FindUser } = require("../../repositories/UserRepository");
 const { userNotFound } = require("../../utils/helpers/error-helpers");
 
-const deleteUserMiddleware = async (req, res, next) => {
+const UserExists = async (req, res, next) => {
   const { id } = req.params;
 
   if ((await FindUser(id)) != 1) {
@@ -13,4 +13,4 @@ const deleteUserMiddleware = async (req, res, next) => {
   next();
 };
 
-module.exports = deleteUserMiddleware;
+module.exports = UserExists;
