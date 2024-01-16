@@ -1,10 +1,11 @@
 module.exports = {
-  urlNotFound: () => {
-      const err = new Error('URL não encontrada, por favor, verifique a documentação.');
-      err.status = 404;
-      err.code = 'URLNaoEncontrada';
-      return err;
-    },
+  userNotFound: () => {
+    const err = new Error('Usuário não encontrado.');
+    err.status = 404;
+    err.code = 'UsuarioNaoEncontrado';
+    return err;
+},
+
   
     emailExists: () => {
       const err = new Error('O email já está associado a outra conta de usuário.');
