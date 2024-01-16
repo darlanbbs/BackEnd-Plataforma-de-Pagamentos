@@ -1,7 +1,7 @@
+const { FindUserByEmail } = require("../../repositories/UserRepository");
 const { emailExists, invalidData } = require("../../utils/helpers/error-helpers");
-
 const CreateUserValidationMiddleware = (schema) => {
-  return  (req, res, next) => {
+  return async (req, res, next) => {
     const {email} = req.body
     const { error } = schema.validate(req.body, { abortEarly: false });
 
@@ -13,9 +13,11 @@ const CreateUserValidationMiddleware = (schema) => {
       }
     }
 
-    if(emailExists(email)) {
-      const customError = emailExists();
-      return res.status(customError.status).json({ message: customError.message });
+    
+    if(await FindUserByEmail(email)){
+      
+        const customError = emailExists();
+        return res.status(customError.status).json({ message: customError.message });
     }
 
     next();
