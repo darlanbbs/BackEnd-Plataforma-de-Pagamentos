@@ -17,6 +17,7 @@ CREATE TABLE saldos (
     nome VARCHAR(255) NOT NULL,
     descricao TEXT,
     valor_inicial DECIMAL(10, 2) NOT NULL,
+    valor_utilizado DECIMAL(10, 2) NOT NULL,
     valor_restante DECIMAL(10, 2) NOT NULL
 );
 -- TABELA DE PAGAMENTOS
