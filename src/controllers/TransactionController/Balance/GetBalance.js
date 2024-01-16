@@ -1,5 +1,4 @@
 const pool = require("../../../config/db");
-const { verifyToken } = require("../../../services/jwt");
 
 const getBalance = async (req, res) => {
   const { id } = req.params;
