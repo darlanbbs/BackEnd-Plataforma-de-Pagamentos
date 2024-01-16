@@ -1,6 +1,13 @@
 const { FindUserByEmail } = require("../../../repositories/UserRepository");
 const { verifyToken } = require("../../../services/jwt");
-const { invalidData } = require("../../../utils/helpers/error-helpers");
+const {
+  addToBlackList,
+  checkBlackList,
+} = require("../../../utils/BlackListToken");
+const {
+  invalidData,
+  unathourizedPermission,
+} = require("../../../utils/helpers/error-helpers");
 const {
   tokenNotProvided,
   invalidToken,
@@ -32,22 +39,35 @@ const CheckAuth = (schema) => {
 };
 
 const checkToken = async (req, res, next) => {
-  const token = req.headers.authorization;
-  const errTokenNotProvided = tokenNotProvided();
-  const invalidToken = invalidToken();
+  const { id } = req.params;
+  const { authorization } = req.headers;
+  const token = authorization && authorization.split(" ")[1];
 
   if (!token) {
+    const errTokenNotProvided = tokenNotProvided();
     return res
       .status(errTokenNotProvided.status)
       .json({ mensagem: errTokenNotProvided.message });
   }
 
-  if (await !verifyToken(token)) {
+  const isValidToken = await verifyToken(token);
+
+  const userIdFromToken = isValidToken.id;
+
+  if (userIdFromToken != id) {
+    const errUnathourizedPermission = unathourizedPermission();
     return res
-      .status(invalidToken.status)
-      .json({ mensagem: invalidToken.message });
+      .status(errUnathourizedPermission.status)
+      .json({ mensagem: errUnathourizedPermission.message });
   }
 
+  if (!isValidToken || checkBlackList(token)) {
+    const errInvalidToken = invalidToken();
+    return res
+      .status(errInvalidToken.status)
+      .json({ mensagem: errInvalidToken.message });
+  }
+  addToBlackList(token);
   next();
 };
 
