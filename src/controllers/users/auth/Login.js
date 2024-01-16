@@ -13,9 +13,9 @@ const loginUser = async (req,res) => {
 
        const match = await bcrypt.compare(senha, rows[0].senha)
 
-       
+
        if(!match) {
-        return res.status(401).json({ message: "Email ou senha inválidos" });
+        return res.status(401).json({ message: "Os dados fornecidos são inválidos." });
        }
 
 
