@@ -1,4 +1,4 @@
-const { emailJaExistente, dadosInvalidos } = require("../../utils/helpers/error-helpers");
+const { emailExists, invalidData } = require("../../utils/helpers/error-helpers");
 
 const CreateUserValidationMiddleware = (schema) => {
   return (req, res, next) => {
@@ -8,10 +8,10 @@ const CreateUserValidationMiddleware = (schema) => {
       const errorMessage = error.details[0].message;
 
       if (errorMessage.includes('email') && errorMessage.includes('already exists')) {
-        const customError = emailJaExistente();
+        const customError = emailExists();
         return res.status(customError.status).json({ message: customError.message });
       } else {
-        const customError = dadosInvalidos();
+        const customError = invalidData();
         return res.status(customError.status).json({ message: customError.message });
 
       }
