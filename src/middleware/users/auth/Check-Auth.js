@@ -1,9 +1,6 @@
 const { FindUserByEmail } = require("../../../repositories/UserRepository");
 const { verifyToken } = require("../../../services/jwt");
-const {
-  addToBlackList,
-  checkBlackList,
-} = require("../../../utils/BlackListToken");
+const { checkBlackList } = require("../../../utils/BlackListToken");
 const {
   invalidData,
   unathourizedPermission,

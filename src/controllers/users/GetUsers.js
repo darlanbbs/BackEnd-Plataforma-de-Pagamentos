@@ -10,4 +10,17 @@ const getUsers = async (req, res) => {
   }
 };
 
-module.exports = getUsers;
+const getUser = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const { rows } = await pool.query("select * from usuarios where id = $1", [
+      id,
+    ]);
+    return res.send(rows);
+  } catch (error) {
+    return res.status(500).json(`Erro interno do servidor ${error}`);
+  }
+};
+
+module.exports = { getUsers, getUser };
