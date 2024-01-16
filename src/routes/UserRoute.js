@@ -16,12 +16,14 @@ const {
   checkToken,
 } = require("../middleware/users/auth/Check-Auth");
 const authUserSchema = require("../validator/UsersSchema/AuthUserSchema");
+const signOut = require("../controllers/users/auth/LogOut");
 
 userRoute.get("/", getUsers);
 userRoute.post("/", UserValidationMiddleware(createUserSchema), createUser);
-userRoute.post("/login", CheckAuth(authUserSchema), loginUser);
+userRoute.post("/signin", CheckAuth(authUserSchema), loginUser);
 
 // nescessario estar logado
+userRoute.post("/signout", checkToken, signOut);
 userRoute.delete("/delete/:id", checkToken, deleteUserMiddleware, deleteUser);
 userRoute.patch(
   "/update/:id",
