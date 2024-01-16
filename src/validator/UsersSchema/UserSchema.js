@@ -6,9 +6,15 @@ const createUserSchema = Joi.object({
   senha: Joi.string().min(3).required(),
 });
 
+const updateUserSchema = Joi.object({
+    nome: Joi.string().min(3),
+    email: Joi.string().email().min(3),
+    senha: Joi.string().min(3),
+})
+
 const associacaoPagamentoUsuarioSchema = Joi.object({
     pagamento_id: Joi.number().integer().positive().required(),
     usuario_id: Joi.number().integer().positive().required(),
   });
 
-module.exports = {createUserSchema,associacaoPagamentoUsuarioSchema}
+module.exports = {createUserSchema,associacaoPagamentoUsuarioSchema,updateUserSchema}
