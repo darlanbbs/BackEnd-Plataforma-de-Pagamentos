@@ -1,6 +1,5 @@
 const jwt = require("jsonwebtoken");
 
-
 module.exports = {
   newToken: async (id) => {
     const token = jwt.sign({ id: id }, process.env.JWT_PASS, {
@@ -9,16 +8,12 @@ module.exports = {
     return token;
   },
   verifyToken: async (token) => {
-    const validToken = jwt.verify(
-      token,
-      process.env.JWT_PASS,
-      (err, user) => {
-        if (err) {
-          return false;
-        }
-        return user;
+    const validToken = jwt.verify(token, process.env.JWT_PASS, (err, user) => {
+      if (err) {
+        return false;
       }
-    );
+      return user;
+    });
     return validToken;
   },
 };
