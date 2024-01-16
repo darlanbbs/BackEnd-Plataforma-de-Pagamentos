@@ -1,6 +1,6 @@
 const { FindUserByEmail } = require("../../repositories/UserRepository");
 const { emailExists, invalidData } = require("../../utils/helpers/error-helpers");
-const CreateUserValidationMiddleware = (schema) => {
+const UserValidationMiddleware = (schema) => {
   return async (req, res, next) => {
     const {email} = req.body
     const { error } = schema.validate(req.body, { abortEarly: false });
@@ -24,4 +24,4 @@ const CreateUserValidationMiddleware = (schema) => {
   };
 };
 
-module.exports = CreateUserValidationMiddleware;
+module.exports = UserValidationMiddleware;
