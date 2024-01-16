@@ -7,6 +7,7 @@ const { createUserSchema, updateUserSchema } = require("../validator/UsersSchema
 const deleteUser = require("../controllers/users/DeleteUser");
 const deleteUserMiddleware = require("../middleware/users/DeleteUserMiddleware");
 const updateUser = require("../controllers/users/edit/EditUser");
+const loginUser = require("../controllers/users/auth/Login");
 
 
 
@@ -14,4 +15,5 @@ userRoute.get("/",getUsers)
 userRoute.post("/",UserValidationMiddleware(createUserSchema),createUser)
 userRoute.delete("/:id",deleteUserMiddleware,deleteUser)
 userRoute.patch("/update/:id",UserValidationMiddleware(updateUserSchema),updateUser)
+userRoute.post("/login", loginUser)
 module.exports = userRoute;

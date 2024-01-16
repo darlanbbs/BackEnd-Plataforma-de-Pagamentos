@@ -19,4 +19,5 @@ const FindUserByEmail = async (email) => {
 return parseInt(rowCount)
   };
   
+
   module.exports = {FindUserByEmail, FindUser}
