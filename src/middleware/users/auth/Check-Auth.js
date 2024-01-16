@@ -37,7 +37,6 @@ const CheckAuth = (schema) => {
     next();
   };
 };
-
 const checkToken = async (req, res, next) => {
   const { id } = req.params;
   const { authorization } = req.headers;
@@ -49,7 +48,9 @@ const checkToken = async (req, res, next) => {
       .status(errTokenNotProvided.status)
       .json({ mensagem: errTokenNotProvided.message });
   }
-
+  if (req.path === "/signout") {
+    return next();
+  }
   const isValidToken = await verifyToken(token);
 
   const userIdFromToken = isValidToken.id;
@@ -61,13 +62,12 @@ const checkToken = async (req, res, next) => {
       .json({ mensagem: errUnathourizedPermission.message });
   }
 
-  if (!isValidToken || checkBlackList(token)) {
+  if (!isValidToken || checkBlackList(token) === true) {
     const errInvalidToken = invalidToken();
     return res
       .status(errInvalidToken.status)
       .json({ mensagem: errInvalidToken.message });
   }
-  addToBlackList(token);
   next();
 };
 
