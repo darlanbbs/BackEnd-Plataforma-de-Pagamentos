@@ -1,5 +1,5 @@
 const express = require("express");
-const userRoute = express();
+const userRoute = express.Router({ mergeParams: true });
 const getUsers = require("../controllers/users/GetUsers");
 const createUser = require("../controllers/users/CreateUser");
 const UserValidationMiddleware = require("../middleware/users/UserValidationMiddleware");
@@ -20,10 +20,12 @@ const authUserSchema = require("../validator/UsersSchema/AuthUserSchema");
 userRoute.get("/", getUsers);
 userRoute.post("/", UserValidationMiddleware(createUserSchema), createUser);
 userRoute.post("/login", CheckAuth(authUserSchema), loginUser);
-userRoute.use(checkToken);
-userRoute.delete("/:id", deleteUserMiddleware, deleteUser);
+
+// nescessario estar logado
+userRoute.delete("/delete/:id", checkToken, deleteUserMiddleware, deleteUser);
 userRoute.patch(
   "/update/:id",
+  checkToken,
   UserValidationMiddleware(updateUserSchema),
   updateUser
 );
