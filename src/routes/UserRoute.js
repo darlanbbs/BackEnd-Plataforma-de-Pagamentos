@@ -8,7 +8,7 @@ const {
   updateUserSchema,
 } = require("../validator/UsersSchema/UserSchema");
 const deleteUser = require("../controllers/users/DeleteUser");
-const updateUser = require("../controllers/users/edit/EditUser");
+const updateUser = require("../controllers/users/EditUser");
 const loginUser = require("../controllers/users/auth/Login");
 const {
   CheckAuth,
