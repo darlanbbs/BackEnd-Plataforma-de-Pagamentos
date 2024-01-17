@@ -1,10 +1,10 @@
-const { getBalanceById } = require("../../repositories/BalanceRepositorie");
+const { getBalanceById } = require("../../../repositories/BalanceRepositorie");
 const {
   valueIsMandatory,
   invalidData,
   restValuesIsBiggerThanZero,
   initialValueIsMinorOrEqualsZero,
-} = require("../../utils/helpers/error-helpers");
+} = require("../../../utils/helpers/error-helpers");
 
 const updateCheckValuesBalanceMiddleware = (schema) => {
   return async (req, res, next) => {

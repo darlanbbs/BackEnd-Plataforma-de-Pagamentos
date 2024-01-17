@@ -1,4 +1,4 @@
-const { invalidData } = require("../../utils/helpers/error-helpers");
+const { invalidData } = require("../../../utils/helpers/error-helpers");
 
 const addDefaultValue = (data) => {
   if ("valor_inicial" in data) {
