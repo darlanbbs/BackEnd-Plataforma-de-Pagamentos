@@ -7,7 +7,7 @@ const {
 const TransactionValidationMiddleware = require("../middleware/TransactionMiddleware/TransactionValidationMiddleware");
 const {
   createSaldoSchema,
-} = require("../validator/TransactionsSchema/TransactionsSchema");
+} = require("../validator/TransactionsSchema/BalanceSchema");
 const {
   createBalance,
 } = require("../controllers/TransactionController/Balance/CreateBalance");
