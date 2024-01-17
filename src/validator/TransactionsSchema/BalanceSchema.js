@@ -8,4 +8,10 @@ const createSaldoSchema = Joi.object({
   valor_utilizado: Joi.allow(""),
 });
 
-module.exports = { createSaldoSchema };
+const updateSaldoSchema = Joi.object({
+  nome: Joi.string().min(3),
+  descricao: Joi.string().allow("").max(255),
+  valor_inicial: Joi.number().positive().precision(2),
+});
+
+module.exports = { createSaldoSchema, updateSaldoSchema };
