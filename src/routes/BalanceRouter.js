@@ -20,25 +20,25 @@ const {
   deleteCheckValuesBalanceMiddleware,
 } = require("../middleware/TransactionMiddleware/CheckValue");
 const deleteBalance = require("../controllers/TransactionController/Balance/DeleteBalance");
-const TransactionsRouter = express();
+const BalanceRouter = express();
 
-TransactionsRouter.get("/balance/:id", checkToken, getBalance);
-TransactionsRouter.post(
+BalanceRouter.get("/balance/:id", checkToken, getBalance);
+BalanceRouter.post(
   "/balance/:id",
   checkToken,
   TransactionValidationMiddleware(createSaldoSchema),
   createBalance
 );
-TransactionsRouter.patch(
+BalanceRouter.patch(
   "/balance/update/:id",
   checkToken,
   updateCheckValuesBalanceMiddleware(updateSaldoSchema),
   UpdateBalanceValues
 );
-TransactionsRouter.delete(
+BalanceRouter.delete(
   "/balance/delete/:id",
   checkToken,
   deleteCheckValuesBalanceMiddleware,
   deleteBalance
 );
-module.exports = TransactionsRouter;
+module.exports = BalanceRouter;
