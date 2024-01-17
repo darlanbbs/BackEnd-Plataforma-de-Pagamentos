@@ -7,6 +7,7 @@ const {
 const TransactionValidationMiddleware = require("../middleware/TransactionMiddleware/TransactionValidationMiddleware");
 const {
   createSaldoSchema,
+  updateSaldoSchema,
 } = require("../validator/TransactionsSchema/BalanceSchema");
 const {
   createBalance,
@@ -14,6 +15,7 @@ const {
 const {
   updateInitialValue,
 } = require("../controllers/TransactionController/Balance/updateBalance");
+const checkValuesUpdate = require("../middleware/TransactionMiddleware/CheckValue");
 const TransactionsRouter = express();
 
 TransactionsRouter.get("/balance/:id", checkToken, getBalance);
@@ -23,5 +25,10 @@ TransactionsRouter.post(
   TransactionValidationMiddleware(createSaldoSchema),
   createBalance
 );
-TransactionsRouter.patch("/balance/update/:id", checkToken, updateInitialValue);
+TransactionsRouter.patch(
+  "/balance/update/:id",
+  checkToken,
+  checkValuesUpdate(updateSaldoSchema),
+  updateInitialValue
+);
 module.exports = TransactionsRouter;
