@@ -28,4 +28,11 @@ module.exports = {
     err.status = 400;
     return err;
   },
+
+  valueIsMandatory: (value) => {
+    const err = new Error(`O ${value} é obrigatório.`);
+    err.code = "ValorObrigatorio";
+    err.status = 400;
+    return err;
+  },
 };
