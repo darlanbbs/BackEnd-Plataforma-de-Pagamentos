@@ -1,4 +1,4 @@
-const Joi = require('joi');
+const Joi = require("joi");
 
 const createUserSchema = Joi.object({
   nome: Joi.string().min(3).required(),
@@ -7,14 +7,9 @@ const createUserSchema = Joi.object({
 });
 
 const updateUserSchema = Joi.object({
-    nome: Joi.string().min(3),
-    email: Joi.string().email().min(3),
-    senha: Joi.string().min(3),
-})
+  nome: Joi.string().min(3),
+  email: Joi.string().email().min(3),
+  senha: Joi.string().min(3),
+});
 
-const associacaoPagamentoUsuarioSchema = Joi.object({
-    pagamento_id: Joi.number().integer().positive().required(),
-    usuario_id: Joi.number().integer().positive().required(),
-  });
-
-module.exports = {createUserSchema,associacaoPagamentoUsuarioSchema,updateUserSchema}
+module.exports = { createUserSchema, updateUserSchema };

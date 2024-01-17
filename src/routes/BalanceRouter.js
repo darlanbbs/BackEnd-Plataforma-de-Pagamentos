@@ -6,8 +6,8 @@ const {
 } = require("../controllers/TransactionController/Balance/getBalance");
 const TransactionValidationMiddleware = require("../middleware/TransactionMiddleware/TransactionValidationMiddleware");
 const {
-  createSaldoSchema,
-  updateSaldoSchema,
+  CreateBalanceSchema,
+  updateBalanceSchema,
 } = require("../validator/TransactionsSchema/BalanceSchema");
 const {
   createBalance,
@@ -26,13 +26,13 @@ BalanceRouter.get("/balance/:id", checkToken, getBalance);
 BalanceRouter.post(
   "/balance/:id",
   checkToken,
-  TransactionValidationMiddleware(createSaldoSchema),
+  TransactionValidationMiddleware(CreateBalanceSchema),
   createBalance
 );
 BalanceRouter.patch(
   "/balance/update/:id",
   checkToken,
-  updateCheckValuesBalanceMiddleware(updateSaldoSchema),
+  updateCheckValuesBalanceMiddleware(updateBalanceSchema),
   UpdateBalanceValues
 );
 BalanceRouter.delete(
