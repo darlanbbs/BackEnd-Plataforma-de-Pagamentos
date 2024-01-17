@@ -18,7 +18,7 @@ CREATE TABLE saldos (
     descricao TEXT,
     valor_inicial DECIMAL(10, 2) NOT NULL,
     valor_utilizado DECIMAL(10, 2) DEFAULT 0.00,
-    valor_restante DECIMAL(10, 2) DEFAULT valor_inicial,
+    valor_restante DECIMAL(10, 2),
     usuario_id INT REFERENCES usuarios(id) ON DELETE CASCADE
 );
 

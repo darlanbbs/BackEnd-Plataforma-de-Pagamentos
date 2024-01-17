@@ -4,6 +4,9 @@ const addDefaultValue = (data) => {
   if ("valor_inicial" in data) {
     data.valor_restante = data.valor_inicial;
   }
+  if ("valor_restante" in data) {
+    data.valor_utilizado = 0;
+  }
   return data;
 };
 
