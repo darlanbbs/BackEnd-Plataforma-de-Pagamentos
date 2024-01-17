@@ -56,7 +56,7 @@ const deleteCheckValuesBalanceMiddleware = async (req, res, next) => {
       .json({ message: customError.message });
   }
   if (!balance) {
-    const customError = valueIsMandatory("BalanceId");
+    const customError = valueIsMandatory("Saldo");
     return res
       .status(customError.status)
       .json({ message: customError.message });
