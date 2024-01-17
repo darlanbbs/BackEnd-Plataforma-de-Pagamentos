@@ -3,11 +3,12 @@ const PaymentsRouter = express();
 const { checkToken } = require("../middleware/users/auth/Check-Auth");
 const createPayment = require("../controllers/TransactionController/Payments/CreatePayment");
 const {
-  CreatePaymentMiddleware,
   deleteCheckValuesPayment,
+  UpdatePaymentMiddleware,
 } = require("../middleware/TransactionMiddleware/Payment/CheckValue");
 const {
   createPaymentSchema,
+  updatePaymentSchema,
 } = require("../validator/TransactionsSchema/PaymentsSchema");
 const {
   getPayments,
@@ -15,6 +16,10 @@ const {
 const {
   deletePayment,
 } = require("../controllers/TransactionController/Payments/DeletePayment");
+const {
+  updatePayment,
+} = require("../controllers/TransactionController/Payments/UpdatePayment");
+const CreatePaymentMiddleware = require("../middleware/TransactionMiddleware/Payment/PaymentValidationMiddleware");
 
 PaymentsRouter.post(
   "/payment/:id",
@@ -29,6 +34,13 @@ PaymentsRouter.delete(
   deleteCheckValuesPayment,
   checkToken,
   deletePayment
+);
+
+PaymentsRouter.patch(
+  "/payment/:id",
+  checkToken,
+  UpdatePaymentMiddleware(updatePaymentSchema),
+  updatePayment
 );
 
 module.exports = PaymentsRouter;

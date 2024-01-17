@@ -6,4 +6,9 @@ const createPaymentSchema = Joi.object({
   valor: Joi.number().positive().precision(2).required(),
 });
 
-module.exports = { createPaymentSchema };
+const updatePaymentSchema = Joi.object({
+  nome: Joi.string().max(30),
+  descricao: Joi.string().allow("").max(255),
+  valor: Joi.number().positive().precision(2),
+});
+module.exports = { createPaymentSchema, updatePaymentSchema };
