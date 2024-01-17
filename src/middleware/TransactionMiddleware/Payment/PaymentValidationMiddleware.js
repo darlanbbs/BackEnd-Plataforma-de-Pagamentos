@@ -1,61 +1,32 @@
 const {
   checkValuePayment,
-  checkPaymentExists,
 } = require("../../../repositories/PaymentRepositorie");
 const {
-  initialValueIsMinorOrEqualsZero,
   valueIsMandatory,
-  invalidData,
   valueUsedIsBiggerThanRest,
-  unathourizedPermission,
+  initialValueIsMinorOrEqualsZero,
 } = require("../../../utils/helpers/error-helpers");
 
-const deleteCheckValuesPayment = async (req, res, next) => {
-  const { balanceId } = req.query;
-  const { id } = req.params;
-  const Payment = await checkPaymentExists(balanceId);
-  if (!balanceId) {
-    const customError = valueIsMandatory("BalanceId");
-    return res
-      .status(customError.status)
-      .json({ message: customError.message });
-  }
-  if (!Payment) {
-    const customError = valueIsMandatory("Pagamento");
-    return res
-      .status(customError.status)
-      .json({ message: customError.message });
-  }
-  if (!id) {
-    const customError = valueIsMandatory("Id");
-    return res
-      .status(customError.status)
-      .json({ message: customError.message });
-  }
-  if (Payment.usuario_id != id) {
-    const errUnathourizedPermission = unathourizedPermission();
-    return res
-      .status(errUnathourizedPermission.status)
-      .json({ mensagem: errUnathourizedPermission.message });
-  }
-  next();
-};
-
-const UpdatePaymentMiddleware = (schema) => {
+const CreatePaymentMiddleware = (schema) => {
   return async (req, res, next) => {
     const { id } = req.params;
     const { balanceId } = req.query;
     const { valor } = req.body;
     const values = await checkValuePayment(balanceId);
-    console.log(values);
 
-    if (valor && values < valor) {
+    if (!valor) {
+      const customError = valueIsMandatory("Valor");
+      return res
+        .status(customError.status)
+        .json({ message: customError.message });
+    }
+    if (values && values.valor_restante < valor) {
       const customError = valueUsedIsBiggerThanRest();
       return res
         .status(customError.status)
         .json({ message: customError.message });
     }
-    if (valor && values <= 0) {
+    if (valor <= 0) {
       const customError = initialValueIsMinorOrEqualsZero();
       return res
         .status(customError.status)
@@ -89,7 +60,4 @@ const UpdatePaymentMiddleware = (schema) => {
   };
 };
 
-module.exports = {
-  deleteCheckValuesPayment,
-  UpdatePaymentMiddleware,
-};
+module.exports = CreatePaymentMiddleware;
