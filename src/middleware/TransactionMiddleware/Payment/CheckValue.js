@@ -1,11 +1,13 @@
 const {
   checkValuePayment,
+  checkPaymentExists,
 } = require("../../../repositories/PaymentRepositorie");
 const {
   initialValueIsMinorOrEqualsZero,
   valueIsMandatory,
   invalidData,
   valueUsedIsBiggerThanRest,
+  unathourizedPermission,
 } = require("../../../utils/helpers/error-helpers");
 
 const CreatePaymentMiddleware = (schema) => {
@@ -61,4 +63,38 @@ const CreatePaymentMiddleware = (schema) => {
   };
 };
 
-module.exports = CreatePaymentMiddleware;
+const deleteCheckValuesPayment = async (req, res, next) => {
+  const { balanceId } = req.query;
+  const { id } = req.params;
+  const Payment = await checkPaymentExists(balanceId);
+  if (!balanceId) {
+    const customError = valueIsMandatory("BalanceId");
+    return res
+      .status(customError.status)
+      .json({ message: customError.message });
+  }
+  if (!Payment) {
+    const customError = valueIsMandatory("Pagamento");
+    return res
+      .status(customError.status)
+      .json({ message: customError.message });
+  }
+  if (!id) {
+    const customError = valueIsMandatory("Id");
+    return res
+      .status(customError.status)
+      .json({ message: customError.message });
+  }
+  if (Payment.usuario_id != id) {
+    const errUnathourizedPermission = unathourizedPermission();
+    return res
+      .status(errUnathourizedPermission.status)
+      .json({ mensagem: errUnathourizedPermission.message });
+  }
+  next();
+};
+
+module.exports = {
+  CreatePaymentMiddleware,
+  deleteCheckValuesPayment,
+};

@@ -8,4 +8,11 @@ const checkValuePayment = async (id) => {
   return balanceQuery.rows[0];
 };
 
-module.exports = { checkValuePayment };
+const checkPaymentExists = async (id) => {
+  const paymentQuery = await pool.query(
+    "SELECT * FROM pagamentos WHERE id = $1",
+    [id]
+  );
+  return paymentQuery.rows[0];
+};
+module.exports = { checkValuePayment, checkPaymentExists };
