@@ -33,9 +33,3 @@ CREATE TABLE pagamentos (
   	usuario_id INT REFERENCES usuarios(id) ON DELETE CASCADE
 );
 
--- TABELA DE PAGAMENTOS DOS USUARIOS
-CREATE TABLE pagamentos_usuarios (
-    pagamento_id INT REFERENCES pagamentos(id) ON DELETE CASCADE,
-    usuario_id INT REFERENCES usuarios(id) ON DELETE CASCADE,
-    PRIMARY KEY (pagamento_id, usuario_id)
-);
