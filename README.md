@@ -15,8 +15,8 @@
       <img src="https://img.shields.io/static/v1?label=Express&message=4.8.12&color=#009CA3%3CCOLOR%3E&style=plastic%3CSTYLE%3E&logo=react%3CLOGO%3E" alt="Versão do Nodejs" />
     <img src="https://img.shields.io/static/v1?label=Bcrypt&message=5.1.1&color=#009CA3%3CCOLOR%3E&style=plastic%3CSTYLE%3E&logo=react%3CLOGO%3E" alt="Versão do Bcrypt" />
     <img src="https://img.shields.io/static/v1?label=jsonwebtoken&message=9.0.2&color=#009CA3%3CCOLOR%3E&style=plastic%3CSTYLE%3E&logo=react%3CLOGO%3E" alt="Versão do jsonwebtoken" />
-    <img src="https://img.shields.io/static/v1?label=pg%20Library&message=8.11.3&color=#009CA3%3CCOLOR%3E&style=plastic%3CSTYLE%3E&logo=react%3CLOGO%3E" alt="Versão do PG" />
-    <img src="https://img.shields.io/static/v1?label=joi%20Css&message=17.11.1&color=#009CA3%3CCOLOR%3E&style=plastic%3CSTYLE%3E&logo=react%3CLOGO%3E" alt="Versão do Joi" />
+    <img src="https://img.shields.io/static/v1?label=pg&message=8.11.3&color=#009CA3%3CCOLOR%3E&style=plastic%3CSTYLE%3E&logo=react%3CLOGO%3E" alt="Versão do PG" />
+    <img src="https://img.shields.io/static/v1?label=joi&message=17.11.1&color=#009CA3%3CCOLOR%3E&style=plastic%3CSTYLE%3E&logo=react%3CLOGO%3E" alt="Versão do Joi" />
 </div>
 
 <div align="center">
