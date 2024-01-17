@@ -41,4 +41,10 @@ module.exports = {
     err.status = 400;
     return err;
   },
+  initialValueIsMinorOrEqualsZero: () => {
+    const err = new Error("O valor inicial é menor ou igual a zero.");
+    err.code = "ValorInicialMenorZero";
+    err.status = 400;
+    return err;
+  },
 };

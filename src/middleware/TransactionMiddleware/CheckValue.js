@@ -3,12 +3,19 @@ const {
   valueIsMandatory,
   invalidData,
   restValuesIsBiggerThanZero,
+  initialValueIsMinorOrEqualsZero,
 } = require("../../utils/helpers/error-helpers");
 
 const updateCheckValuesBalanceMiddleware = (schema) => {
   return async (req, res, next) => {
     const { id } = req.params;
     const { balanceId } = req.query;
+    if (req.body.valor_inicial <= 0) {
+      const customError = initialValueIsMinorOrEqualsZero();
+      return res
+        .status(customError.status)
+        .json({ message: customError.message });
+    }
     const { error } = schema.validate(req.body, { abortEarly: false });
     if (error) {
       const errorMessage = error.details[0].message;

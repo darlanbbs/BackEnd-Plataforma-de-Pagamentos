@@ -1,6 +1,6 @@
 const pool = require("../../../config/db");
 
-const updateInitialValue = async (req, res) => {
+const UpdateBalanceValues = async (req, res) => {
   const { balanceId } = req.query;
   const { valor_inicial, nome, descricao } = req.body;
 
@@ -56,4 +56,4 @@ const updateInitialValue = async (req, res) => {
   }
 };
 
-module.exports = { updateInitialValue };
+module.exports = { UpdateBalanceValues };
