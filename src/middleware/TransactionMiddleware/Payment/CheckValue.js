@@ -46,7 +46,6 @@ const UpdatePaymentMiddleware = (schema) => {
     const { balanceId } = req.query;
     const { valor } = req.body;
     const values = await checkPaymentExists(balanceId);
-    console.log(values);
     if (valor && values && values.valor_restante < valor) {
       const customError = valueUsedIsBiggerThanRest();
       return res
