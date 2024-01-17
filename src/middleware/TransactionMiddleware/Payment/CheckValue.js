@@ -1,5 +1,4 @@
 const {
-  checkValuePayment,
   checkPaymentExists,
 } = require("../../../repositories/PaymentRepositorie");
 const {
@@ -46,16 +45,15 @@ const UpdatePaymentMiddleware = (schema) => {
     const { id } = req.params;
     const { balanceId } = req.query;
     const { valor } = req.body;
-    const values = await checkValuePayment(balanceId);
+    const values = await checkPaymentExists(balanceId);
     console.log(values);
-
-    if (valor && values < valor) {
+    if (valor && values && values.valor_restante < valor) {
       const customError = valueUsedIsBiggerThanRest();
       return res
         .status(customError.status)
         .json({ message: customError.message });
     }
-    if (valor && values <= 0) {
+    if (valor && values && valor <= 0) {
       const customError = initialValueIsMinorOrEqualsZero();
       return res
         .status(customError.status)

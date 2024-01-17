@@ -10,9 +10,10 @@ const checkValuePayment = async (id) => {
 
 const checkPaymentExists = async (id) => {
   const paymentQuery = await pool.query(
-    "SELECT * FROM pagamentos WHERE id = $1",
+    "SELECT saldos.* FROM pagamentos JOIN saldos ON pagamentos.saldo_id = saldos.id WHERE pagamentos.id = $1",
     [id]
   );
   return paymentQuery.rows[0];
 };
+
 module.exports = { checkValuePayment, checkPaymentExists };

@@ -11,7 +11,6 @@ const updatePayment = async (req, res) => {
       [balanceId]
     );
 
-    console.log("current" + currentPayment.rows[0].valor);
     const currentValor = currentPayment.rows[0].valor;
     const currentSaldoId = currentPayment.rows[0].saldo_id;
 
