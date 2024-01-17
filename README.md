@@ -364,9 +364,11 @@ ___
 
 # Instale as dependências:
 $ yarn
+$ npm install
 
 # Inciar a aplicação
 $ yarn run dev
+$ npm run dev
 ```
 
 
