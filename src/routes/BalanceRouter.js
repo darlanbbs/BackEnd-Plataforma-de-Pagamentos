@@ -4,7 +4,7 @@ const { checkToken } = require("../middleware/users/auth/Check-Auth");
 const {
   getBalance,
 } = require("../controllers/TransactionController/Balance/getBalance");
-const TransactionValidationMiddleware = require("../middleware/TransactionMiddleware/TransactionValidationMiddleware");
+const TransactionValidationMiddleware = require("../middleware/TransactionMiddleware/balance/TransactionValidationMiddleware");
 const {
   CreateBalanceSchema,
   updateBalanceSchema,
@@ -18,7 +18,7 @@ const {
 const {
   updateCheckValuesBalanceMiddleware,
   deleteCheckValuesBalanceMiddleware,
-} = require("../middleware/TransactionMiddleware/CheckValue");
+} = require("../middleware/TransactionMiddleware/balance/CheckValue");
 const deleteBalance = require("../controllers/TransactionController/Balance/DeleteBalance");
 const BalanceRouter = express();
 
