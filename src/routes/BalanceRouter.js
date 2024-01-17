@@ -4,7 +4,7 @@ const { checkToken } = require("../middleware/users/auth/Check-Auth");
 const {
   getBalance,
 } = require("../controllers/TransactionController/Balance/getBalance");
-const TransactionValidationMiddleware = require("../middleware/TransactionMiddleware/balance/TransactionValidationMiddleware");
+const BalanceValidationMiddleware = require("../middleware/TransactionMiddleware/balance/BalanceValidationMiddleware");
 const {
   CreateBalanceSchema,
   updateBalanceSchema,
@@ -26,7 +26,7 @@ BalanceRouter.get("/balance/:id/:page", checkToken, getBalance);
 BalanceRouter.post(
   "/balance/:id",
   checkToken,
-  TransactionValidationMiddleware(CreateBalanceSchema),
+  BalanceValidationMiddleware(CreateBalanceSchema),
   createBalance
 );
 BalanceRouter.patch(

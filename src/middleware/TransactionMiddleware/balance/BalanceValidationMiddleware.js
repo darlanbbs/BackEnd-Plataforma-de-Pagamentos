@@ -10,7 +10,7 @@ const addDefaultValue = (data) => {
   return data;
 };
 
-const TransactionValidationMiddleware = (schema) => {
+const BalanceValidationMiddleware = (schema) => {
   return async (req, res, next) => {
     try {
       const dataWithDefaultValue = addDefaultValue(req.body);
@@ -36,4 +36,4 @@ const TransactionValidationMiddleware = (schema) => {
   };
 };
 
-module.exports = TransactionValidationMiddleware;
+module.exports = BalanceValidationMiddleware;
