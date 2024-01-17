@@ -25,7 +25,7 @@ userRoute.post("/signin", CheckAuth(authUserSchema), loginUser);
 // nescessario estar logado
 userRoute.post("/signout", checkToken, signOut);
 userRoute.delete("/delete/:id", UserExists, checkToken, deleteUser);
-userRoute.get("/:id", UserExists, checkToken, getUser);
+userRoute.get("user/:id", UserExists, checkToken, getUser);
 userRoute.patch(
   "/update/:id",
   UserExists,
