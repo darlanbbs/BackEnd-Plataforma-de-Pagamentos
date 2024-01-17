@@ -47,4 +47,10 @@ module.exports = {
     err.status = 400;
     return err;
   },
+  valueUsedIsBiggerThanRest: () => {
+    const err = new Error("O valor utilizado é maior que o restante.");
+    err.code = "ValorUtilizadoMaiorRestante";
+    err.status = 400;
+    return err;
+  },
 };
