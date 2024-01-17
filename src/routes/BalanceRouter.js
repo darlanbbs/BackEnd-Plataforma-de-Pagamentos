@@ -3,7 +3,7 @@ const express = require("express");
 const { checkToken } = require("../middleware/users/auth/Check-Auth");
 const {
   getBalance,
-} = require("../controllers/TransactionController/Balance/getBalance");
+} = require("../controllers/TransactionController/Balance/GetBalance");
 const BalanceValidationMiddleware = require("../middleware/TransactionMiddleware/balance/BalanceValidationMiddleware");
 const {
   CreateBalanceSchema,
