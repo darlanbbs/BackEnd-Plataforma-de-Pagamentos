@@ -1,15 +1,15 @@
+const { getBalanceById } = require("../../repositories/BalanceRepositorie");
 const {
   valueIsMandatory,
   invalidData,
+  restValuesIsBiggerThanZero,
 } = require("../../utils/helpers/error-helpers");
 
-const checkValuesUpdate = (schema) => {
+const updateCheckValuesBalanceMiddleware = (schema) => {
   return async (req, res, next) => {
     const { id } = req.params;
     const { balanceId } = req.query;
-    const { error } = schema.validate(req.body, {
-      abortEarly: false,
-    });
+    const { error } = schema.validate(req.body, { abortEarly: false });
     if (error) {
       const errorMessage = error.details[0].message;
       if (errorMessage) {
@@ -37,4 +37,39 @@ const checkValuesUpdate = (schema) => {
   };
 };
 
-module.exports = checkValuesUpdate;
+const deleteCheckValuesBalanceMiddleware = async (req, res, next) => {
+  const { balanceId } = req.query;
+  const { id } = req.params;
+  const balance = await getBalanceById(balanceId);
+
+  if (!balanceId) {
+    const customError = valueIsMandatory("BalanceId");
+    return res
+      .status(customError.status)
+      .json({ message: customError.message });
+  }
+  if (!balance) {
+    const customError = valueIsMandatory("BalanceId");
+    return res
+      .status(customError.status)
+      .json({ message: customError.message });
+  }
+  if (!id) {
+    const customError = valueIsMandatory("Id");
+    return res
+      .status(customError.status)
+      .json({ message: customError.message });
+  }
+  if (balance.valor_restante > 0) {
+    const customError = restValuesIsBiggerThanZero();
+    return res
+      .status(customError.status)
+      .json({ message: customError.message });
+  }
+
+  next();
+};
+module.exports = {
+  updateCheckValuesBalanceMiddleware,
+  deleteCheckValuesBalanceMiddleware,
+};
