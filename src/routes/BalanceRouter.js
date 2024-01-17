@@ -22,7 +22,7 @@ const {
 const deleteBalance = require("../controllers/TransactionController/Balance/DeleteBalance");
 const BalanceRouter = express();
 
-BalanceRouter.get("/balance/:id", checkToken, getBalance);
+BalanceRouter.get("/balance/:id/:page", checkToken, getBalance);
 BalanceRouter.post(
   "/balance/:id",
   checkToken,

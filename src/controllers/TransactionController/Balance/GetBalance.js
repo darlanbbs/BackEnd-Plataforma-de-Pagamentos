@@ -1,16 +1,13 @@
 const pool = require("../../../config/db");
 
 const getBalance = async (req, res) => {
-  const { id } = req.params;
-  try {
-    const query = `
-    SELECT saldos.*
-      FROM saldos
-      INNER JOIN usuarios ON saldos.usuario_id = usuarios.id
-      WHERE usuarios.id = $1`;
-    const values = [id];
+  const { id, page } = req.params;
 
-    const { rows } = await pool.query(query, values);
+  try {
+    const { rows } = await pool.query(
+      "SELECT * FROM saldos WHERE usuario_id = $1 ORDER BY id ASC LIMIT 5 OFFSET $2",
+      [id, page]
+    );
 
     return res.send(rows);
   } catch (error) {
