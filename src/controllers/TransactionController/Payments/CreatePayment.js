@@ -2,7 +2,7 @@ const pool = require("../../../config/db");
 
 const createPayment = async (req, res) => {
   const { id } = req.params;
-  const { valor } = req.body;
+  const { valor, nome, descricao } = req.body;
   const { balanceId } = req.query;
 
   try {
@@ -22,8 +22,8 @@ const createPayment = async (req, res) => {
     );
 
     const insertedPayment = await pool.query(
-      "INSERT INTO pagamentos (nome, descricao, valor, saldo_id, usuario_id) VALUES ($1, $2, $3, $4, $5) RETURNING *",
-      ["Nome do Pagamento", "Descrição do Pagamento", valor, balanceId, id]
+      "INSERT INTO pagamentos (nome, descricao, valor, saldo_id, usuario_id) VALUES ($1, $2, $3, $4,$5) RETURNING *",
+      [nome, descricao ?? "", valor, balanceId, id]
     );
 
     return res.status(200).json({
