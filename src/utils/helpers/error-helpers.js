@@ -35,4 +35,10 @@ module.exports = {
     err.status = 400;
     return err;
   },
+  restValuesIsBiggerThanZero: () => {
+    const err = new Error("O valor restante é maior que zero.");
+    err.code = "ValorRestanteMaiorZero";
+    err.status = 400;
+    return err;
+  },
 };
