@@ -12,7 +12,7 @@ user,
   database,
   password,
   port,
-  ssl: false,
+  ssl: true,
 });
 
 module.exports = pool;
