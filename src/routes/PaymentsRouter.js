@@ -28,7 +28,7 @@ PaymentsRouter.post(
   createPayment
 );
 
-PaymentsRouter.get("/payment/:id/:page", checkToken, getPayments);
+PaymentsRouter.get("/payment/:id", checkToken, getPayments);
 PaymentsRouter.delete(
   "/payment/:id",
   deleteCheckValuesPayment,
