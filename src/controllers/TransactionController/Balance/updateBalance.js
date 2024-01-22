@@ -10,17 +10,20 @@ const UpdateBalanceValues = async (req, res) => {
       rows: [actualbalance],
     } = await pool.query("SELECT * FROM saldos WHERE id = $1", [balanceId]);
 
+    // converte os valores para números
+    const valorInicialNumerico = parseFloat(valor_inicial);
+    const valorUtilizadoNumerico = parseFloat(actualbalance.valor_utilizado);
+    const valorInicialAtualNumerico = parseFloat(actualbalance.valor_inicial);
+
     // atualiza o saldo
-    const newValueBalance =
-      actualbalance.valor_utilizado +
-      (valor_inicial - actualbalance.valor_inicial);
+    const newValueBalance = valorUtilizadoNumerico + (valorInicialNumerico - valorInicialAtualNumerico);
 
     // calcula o valor restante
-    const restNewBalance = valor_inicial - newValueBalance;
+    const restNewBalance = valorInicialNumerico - newValueBalance;
 
     // validação se campo existe, se existir adiciona e passa se não só passa
     const setFields = [];
-    const setValues = [valor_inicial, newValueBalance, restNewBalance];
+    const setValues = [valorInicialNumerico, newValueBalance, restNewBalance];
     let index = setValues.length + 1;
 
     if (nome) {
