@@ -5,7 +5,7 @@ const getPayments = async (req, res) => {
 
   try {
     const { rows } = await pool.query(
-      "SELECT * FROM pagamentos WHERE usuario_id = $1 ORDER BY id ASC LIMIT 5",
+      "SELECT * FROM pagamentos WHERE usuario_id = $1 ORDER BY id ASC",
       [id]
     );
 
