@@ -2,60 +2,60 @@ const pool = require("../../../config/db");
 
 const UpdateBalanceValues = async (req, res) => {
   const { balanceId } = req.query;
-  const { valor_inicial, nome, descricao } = req.body;
+  const { initial_value, name, description } = req.body;
 
   try {
-    // busca de saldos pelo id
+  // busca de saldos pelo id
     const {
-      rows: [actualbalance],
-    } = await pool.query("SELECT * FROM saldos WHERE id = $1", [balanceId]);
+      rows: [currentBalance],
+    } = await pool.query("SELECT * FROM balances WHERE id = $1", [balanceId]);
 
-    // converte os valores para números
-    const valorInicialNumerico = parseFloat(valor_inicial);
-    const valorUtilizadoNumerico = parseFloat(actualbalance.valor_utilizado);
-    const valorInicialAtualNumerico = parseFloat(actualbalance.valor_inicial);
+   
+    const initialNumeric = parseFloat(initial_value);
+    const utilizedNumeric = parseFloat(currentBalance.utilized_value);
+    const currentInitialNumeric = parseFloat(currentBalance.initial_value);
+    const currentRemainingNumeric = parseFloat(currentBalance.remaining_value);
 
-    // atualiza o saldo
-    const newValueBalance = valorUtilizadoNumerico + (valorInicialNumerico - valorInicialAtualNumerico);
+  // calcula o valor restante corrigido antes da atualização
+    const updatedRemaining = currentRemainingNumeric + (initialNumeric - currentInitialNumeric);
 
-    // calcula o valor restante
-    const restNewBalance = valorInicialNumerico - newValueBalance;
+     // atualiza o saldo
+    const newUtilizedValue = utilizedNumeric + updatedRemaining;
 
-    // validação se campo existe, se existir adiciona e passa se não só passa
+   
     const setFields = [];
-    const setValues = [valorInicialNumerico, newValueBalance, restNewBalance];
+    const setValues = [initialNumeric, newUtilizedValue, updatedRemaining];
     let index = setValues.length + 1;
 
-    if (nome) {
-      setFields.push(`nome = $${index}`);
-      setValues.push(nome);
+    if (name) {
+      setFields.push(`name = $${index}`);
+      setValues.push(name);
       index++;
     }
 
-    if (descricao) {
-      setFields.push(`descricao = $${index}`);
-      setValues.push(descricao);
+    if (description) {
+      setFields.push(`description = $${index}`);
+      setValues.push(description);
       index++;
     }
 
     const query = `
-      UPDATE saldos 
-      SET valor_inicial = $1, valor_utilizado = $2, valor_restante = $3
+      UPDATE balances 
+      SET initial_value = $1, utilized_value = $2, remaining_value = $3
       ${setFields.length > 0 ? `, ${setFields.join(", ")}` : ""}
       WHERE id = $${index}
       RETURNING *`;
 
-    // adiciona o id do saldo que vai atualizar
+  
     setValues.push(balanceId);
 
     const {
       rows: [updatedBalance],
-      // query com valores a ser atualizados como nome/descricao e o id do saldo a ser atualizado
     } = await pool.query(query, setValues);
 
     return res.status(200).json(updatedBalance);
   } catch (error) {
-    return res.status(500).json(`Erro interno do servidor ${error}`);
+    return res.status(500).json(`Internal server error ${error}`);
   }
 };
 
