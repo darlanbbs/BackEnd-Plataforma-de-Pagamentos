@@ -11,10 +11,10 @@ const UpdateBalanceValues = async (req, res) => {
     } = await pool.query("SELECT * FROM saldos WHERE id = $1", [balanceId]);
 
    
-    const initialNumeric = parseFloat(initial_value);
-    const utilizedNumeric = parseFloat(currentBalance.utilized_value);
-    const currentInitialNumeric = parseFloat(currentBalance.initial_value);
-    const currentRemainingNumeric = parseFloat(currentBalance.remaining_value);
+    const initialNumeric = parseFloat(valor_inicial);
+    const utilizedNumeric = parseFloat(currentBalance.valor_utilizado);
+    const currentInitialNumeric = parseFloat(currentBalance.valor_inicial);
+    const currentRemainingNumeric = parseFloat(currentBalance.valor_restante);
 
   // calcula o valor restante corrigido antes da atualização
     const updatedRemaining = currentRemainingNumeric + (initialNumeric - currentInitialNumeric);
@@ -27,13 +27,13 @@ const UpdateBalanceValues = async (req, res) => {
     const setValues = [initialNumeric, newUtilizedValue, updatedRemaining];
     let index = setValues.length + 1;
 
-    if (name) {
+    if (nome) {
       setFields.push(`nome = $${index}`);
       setValues.push(name);
       index++;
     }
 
-    if (description) {
+    if (descricao) {
       setFields.push(`descricao = $${index}`);
       setValues.push(description);
       index++;
