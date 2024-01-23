@@ -28,20 +28,20 @@ const UpdateBalanceValues = async (req, res) => {
     let index = setValues.length + 1;
 
     if (name) {
-      setFields.push(`name = $${index}`);
+      setFields.push(`nome = $${index}`);
       setValues.push(name);
       index++;
     }
 
     if (description) {
-      setFields.push(`description = $${index}`);
+      setFields.push(`descricao = $${index}`);
       setValues.push(description);
       index++;
     }
 
     const query = `
       UPDATE saldos 
-      SET initial_value = $1, utilized_value = $2, remaining_value = $3
+      SET valor_inicial = $1, valor_utilizado = $2, valor_restante = $3
       ${setFields.length > 0 ? `, ${setFields.join(", ")}` : ""}
       WHERE id = $${index}
       RETURNING *`;
@@ -55,7 +55,7 @@ const UpdateBalanceValues = async (req, res) => {
 
     return res.status(200).json(updatedBalance);
   } catch (error) {
-    return res.status(500).json(`Internal server error ${error}`);
+    return res.status(500).json(`Erro interno no servidor ${error}`);
   }
 };
 
