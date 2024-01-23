@@ -40,7 +40,7 @@ const UpdateBalanceValues = async (req, res) => {
     }
 
     const query = `
-      UPDATE balances 
+      UPDATE saldos 
       SET initial_value = $1, utilized_value = $2, remaining_value = $3
       ${setFields.length > 0 ? `, ${setFields.join(", ")}` : ""}
       WHERE id = $${index}
