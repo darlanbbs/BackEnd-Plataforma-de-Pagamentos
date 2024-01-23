@@ -27,7 +27,7 @@
     <a href="#contato"> Contato</a>
 </div><br>
 
-**Demo API:** [**https://plataforma-de-pagamentos.onrender.com**](https://plataforma-de-pagamentos.onrender.com)
+**Demo API:** [**https://tan-wide-eyed-llama.cyclic.app/**](https://tan-wide-eyed-llama.cyclic.app/)
 
 
 <br/>
