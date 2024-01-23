@@ -2,7 +2,7 @@ const pool = require("../../../config/db");
 
 const UpdateBalanceValues = async (req, res) => {
   const { balanceId } = req.query;
-  const { initial_value, name, description } = req.body;
+  const { valor_inicial, nome, descricao } = req.body;
 
   try {
   // busca de saldos pelo id
