@@ -29,13 +29,13 @@ const UpdateBalanceValues = async (req, res) => {
 
     if (nome) {
       setFields.push(`nome = $${index}`);
-      setValues.push(name);
+      setValues.push(nome);
       index++;
     }
 
     if (descricao) {
       setFields.push(`descricao = $${index}`);
-      setValues.push(description);
+      setValues.push(descricao);
       index++;
     }
 
