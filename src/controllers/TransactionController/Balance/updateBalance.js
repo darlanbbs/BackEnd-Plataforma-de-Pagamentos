@@ -8,7 +8,7 @@ const UpdateBalanceValues = async (req, res) => {
   // busca de saldos pelo id
     const {
       rows: [currentBalance],
-    } = await pool.query("SELECT * FROM balances WHERE id = $1", [balanceId]);
+    } = await pool.query("SELECT * FROM saldos WHERE id = $1", [balanceId]);
 
    
     const initialNumeric = parseFloat(initial_value);
