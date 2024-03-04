@@ -1,11 +1,5 @@
 <div align="center">
-    <img src="https://play-lh.googleusercontent.com/1QWtJPBqbtDBw9RGPVK8AmTu3XLrFfRdksluzr4HW-C3EoYK4rxcGl1_3ClPupSKNdxy" alt="Logo" width="400px"/>
-</div>
-
-<br/>
-
-<div align="center">
-    <h1>Challenge Plataforma de pagamentos</h1>
+    <h1>Desafio Plataforma de pagamentos</h1>
     <p align="center">Este é o Back-End de uma aplicação feita em <a href="https://nodejs.org/en">Node</a> que consiste em ser uma plataforma de pagamentos com algumas funcionalidades.
     </p>
 </div>
@@ -353,7 +347,7 @@
 **Clone o projeto e acesse a pasta:**
 
 ```bash
-$ git clone git@github.com:darlanbbs/BackEnd-projeto-selecao-incentiveme.git && cd BackEnd-projeto-selecao-incentiveme
+$ git clone git@github.com:darlanbbs/BackEnd-Plataforma-de-Pagamentos.git && cd BackEnd-Plataforma-de-Pagamentos
 ```
 
 ___
